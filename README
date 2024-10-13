@@ -11,8 +11,9 @@ flake.nix
       # ...
     ];
 
-configuration.nix, this is working configuration in South Korea right now.
+zapret.nix, this is working configuration in Russia with discord right now, import it in your configuration.nix.
 
+{
   services.zapret.enable = true;
   services.zapret.config = ''
     FWTYPE=nftables
@@ -35,9 +36,14 @@ configuration.nix, this is working configuration in South Korea right now.
     MODE_QUIC=1
     MODE_FILTER=none
 
+    QUIC_PORTS=9993,50000-65535
+
+
     DESYNC_MARK=0x40000000
     DESYNC_MARK_POSTNAT=0x20000000
     NFQWS_OPT_DESYNC="--dpi-desync=disorder2"
+    NFQWS_OPT_DESYNC_QUIC="--dpi-desync=fake --dpi-desync-repeats=8 --dpi-desync-any-protocol --dpi-desync-autottl=1:1-8"
+
     TPWS_OPT="--hostspell=HOST --split-http-req=method --split-pos=3 --oob"
 
     FLOWOFFLOAD=donttouch
@@ -45,4 +51,6 @@ configuration.nix, this is working configuration in South Korea right now.
     INIT_APPLY_FW=1
     DISABLE_IPV6=0
   '';
+}
+
 
